@@ -26,6 +26,7 @@ public class CharacterController : MonoBehaviour
     void Update()
     {
         transform.Translate(new Vector3(0, _verticalSpeed * Time.deltaTime));
+        _footScript.CheckGround();
 
         _isGrounded = _footScript.isGrounded;
 

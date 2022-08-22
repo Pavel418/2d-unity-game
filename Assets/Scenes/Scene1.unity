@@ -635,6 +635,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6551457816010643093, guid: 24f9227829ace93449b31d8510064a66, type: 3}
+      propertyPath: JumpAcceleration
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6551457816010643093, guid: 24f9227829ace93449b31d8510064a66, type: 3}
+      propertyPath: GravityAcceleration
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9069800143609303569, guid: 24f9227829ace93449b31d8510064a66, type: 3}
       propertyPath: m_Name
       value: Hero
