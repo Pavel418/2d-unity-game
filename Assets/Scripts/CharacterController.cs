@@ -5,38 +5,44 @@ using UnityEngine.InputSystem;
 
 public class CharacterController : MonoBehaviour
 {
-    public float GravityForce;
-    public float JumpForce;
+    public float GravityAcceleration;
+    public float JumpAcceleration;
     public float Speed;
 
     [SerializeField]
     private bool _isGrounded;
     [SerializeField]
-    private float _notGroundedTime;
-    [SerializeField]
     private float _verticalSpeed;
+
+    private IsGrounded _footScript;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        _footScript = GetComponentInChildren<IsGrounded>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        var position = transform.position;
-        position.Set(position.x, position.y + _verticalSpeed, position.z);
+        transform.Translate(new Vector3(0, _verticalSpeed * Time.deltaTime));
 
-        if(!_isGrounded)
-            _notGroundedTime += Time.deltaTime;
+        _isGrounded = _footScript.isGrounded;
 
-        //_verticalSpeed _= 
+        if (_isGrounded)
+        {
+            _verticalSpeed = 0;
+        }
+        else
+        {
+            _verticalSpeed -= Time.deltaTime * GravityAcceleration;
+        }
     }
 
     void OnJump()
     {
+        Debug.Log("jump");
         if (_isGrounded)
-            _verticalSpeed = JumpForce;
+            _verticalSpeed = JumpAcceleration;
     }
 }
