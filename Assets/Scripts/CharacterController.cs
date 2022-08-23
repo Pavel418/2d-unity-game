@@ -14,17 +14,23 @@ public class CharacterController : MonoBehaviour
     [SerializeField]
     private float _verticalSpeed;
 
+    private float _horizontalSpeed;
+
     private IsGrounded _footScript;
 
-    // Start is called before the first frame update
+    [SerializeField] private float speed;
+    
+
+    
     void Start()
     {
         _footScript = GetComponentInChildren<IsGrounded>();
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
+        transform.Translate(new Vector3(_horizontalSpeed * Time.deltaTime, 0));
         transform.Translate(new Vector3(0, _verticalSpeed * Time.deltaTime));
         _footScript.CheckGround();
 
@@ -38,6 +44,12 @@ public class CharacterController : MonoBehaviour
         {
             _verticalSpeed -= Time.deltaTime * GravityAcceleration;
         }
+
+        //Vector3 dir = transform.right * Input.GetAxis("Horizontal");
+
+        
+
+        //.flipX = dir.x < 0.0f;
     }
 
     void OnJump()
@@ -45,5 +57,10 @@ public class CharacterController : MonoBehaviour
         Debug.Log("jump");
         if (_isGrounded)
             _verticalSpeed = JumpAcceleration;
+    }
+
+    void OnMove(InputValue value)
+    {
+        _horizontalSpeed = speed * value.Get<float>();
     }
 }
