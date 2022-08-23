@@ -32,11 +32,12 @@ public class CharacterController : MonoBehaviour
     void Update()
     {
         StartCoroutine(nameof(UpdateCollider));
+        transform.Translate(new Vector3(_currentHorizontalSpeed, _verticalSpeed) * Time.deltaTime);
     }
     
     private void FixedUpdate()
     {
-        transform.Translate(new Vector3(_currentHorizontalSpeed, _verticalSpeed) * Time.deltaTime);
+        
 
         _currentHorizontalSpeed = Mathf.MoveTowards(_currentHorizontalSpeed, _desiredHorizontalSpeed, HorizontalAcceleration);
     }
