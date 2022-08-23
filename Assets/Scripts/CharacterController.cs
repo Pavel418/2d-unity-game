@@ -8,6 +8,7 @@ public class CharacterController : MonoBehaviour
     public float GravityAcceleration;
     public float JumpAcceleration;
     public float Speed;
+    public float HorizontalAcceleration;
 
     public const string JumpAbleLayerName = "Solid Object";
 
@@ -15,18 +16,12 @@ public class CharacterController : MonoBehaviour
     private bool _isGrounded;
     [SerializeField]
     private float _verticalSpeed;
-
-
+    [SerializeField]
     private float _horizontalSpeed;
-
-    
+    [SerializeField]
+    private float _horizontalAcceleration;
 
     private BoxCollider2D _footCollider;
-
-
-    [SerializeField] private float speed;
-    
-
     
     void Start()
     {
@@ -37,15 +32,15 @@ public class CharacterController : MonoBehaviour
     void Update()
     {
         StartCoroutine(nameof(UpdateCollider));
-        transform.Translate(new Vector3(_horizontalSpeed * Time.deltaTime, 0));
     }
-
-
+    
     private void FixedUpdate()
     {
-        transform.Translate(new Vector3(0, _verticalSpeed * Time.deltaTime));
-
-        
+        transform.Translate(new Vector3(_horizontalSpeed, _verticalSpeed) * Time.deltaTime);
+        if (Speed > Mathf.Abs(_horizontalSpeed))
+            _horizontalSpeed += _horizontalAcceleration * Time.deltaTime;
+        else
+            _horizontalSpeed = Speed;
     }
 
     void OnJump()
@@ -86,20 +81,10 @@ public class CharacterController : MonoBehaviour
         {
             _verticalSpeed -= Time.deltaTime * GravityAcceleration;
         }
-
-        //Vector3 dir = transform.right * Input.GetAxis("Horizontal");
-
-        
-
-        //.flipX = dir.x < 0.0f;
-    }
-
-
-    
+    }    
 
     void OnMove(InputValue value)
     {
-        _horizontalSpeed = speed * value.Get<float>();
+        _horizontalAcceleration = HorizontalAcceleration * value.Get<float>();
     }
-
 }
