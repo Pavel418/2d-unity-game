@@ -17,9 +17,9 @@ public class CharacterController : MonoBehaviour
     [SerializeField]
     private float _verticalSpeed;
     [SerializeField]
-    private float _horizontalSpeed;
+    private float _desiredHorizontalSpeed;
     [SerializeField]
-    private float _horizontalAcceleration;
+    private float _currentHorizontalSpeed;
 
     private BoxCollider2D _footCollider;
     
@@ -36,11 +36,9 @@ public class CharacterController : MonoBehaviour
     
     private void FixedUpdate()
     {
-        transform.Translate(new Vector3(_horizontalSpeed, _verticalSpeed) * Time.deltaTime);
-        if (Speed > Mathf.Abs(_horizontalSpeed))
-            _horizontalSpeed += _horizontalAcceleration * Time.deltaTime;
-        else
-            _horizontalSpeed = Speed;
+        transform.Translate(new Vector3(_currentHorizontalSpeed, _verticalSpeed) * Time.deltaTime);
+
+        _currentHorizontalSpeed = Mathf.MoveTowards(_currentHorizontalSpeed, _desiredHorizontalSpeed, HorizontalAcceleration);
     }
 
     void OnJump()
@@ -85,6 +83,6 @@ public class CharacterController : MonoBehaviour
 
     void OnMove(InputValue value)
     {
-        _horizontalAcceleration = HorizontalAcceleration * value.Get<float>();
+        _desiredHorizontalSpeed = Speed * value.Get<float>();
     }
 }
