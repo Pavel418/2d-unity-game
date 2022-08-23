@@ -37,6 +37,7 @@ public class CharacterController : MonoBehaviour
     void Update()
     {
         StartCoroutine(nameof(UpdateCollider));
+        transform.Translate(new Vector3(_horizontalSpeed * Time.deltaTime, 0));
     }
 
 
@@ -44,7 +45,7 @@ public class CharacterController : MonoBehaviour
     {
         transform.Translate(new Vector3(0, _verticalSpeed * Time.deltaTime));
 
-        transform.Translate(new Vector3(_horizontalSpeed * Time.deltaTime, 0));
+        
     }
 
     void OnJump()
