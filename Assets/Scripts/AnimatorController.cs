@@ -8,6 +8,7 @@ public class AnimatorController : MonoBehaviour
     public static readonly string IDLE = "Idle";
     public static readonly string RUN = "Run";
     public static readonly string SHOOT = "Shoot";
+    public static readonly string RUN_SHOOT = "RunNgun";
 
     Animator _animator;
 
@@ -23,8 +24,9 @@ public class AnimatorController : MonoBehaviour
 
     }
 
-    public void PlayAnimation(string animation)
+    public float PlayAnimation(string animation)
     {
         _animator.Play(animation);
+        return _animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
     }
 }

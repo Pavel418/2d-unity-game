@@ -23,6 +23,8 @@ public class CharacterController : MonoBehaviour
     private float _desiredHorizontalSpeed;
     [SerializeField]
     private float _currentHorizontalSpeed;
+    [SerializeField]
+    private bool isShooting;
 
     private BoxCollider2D _footCollider;
     private AnimatorController _animator;
@@ -41,23 +43,20 @@ public class CharacterController : MonoBehaviour
         StartCoroutine(nameof(UpdateCollider));
         transform.Translate(new Vector3(_currentHorizontalSpeed, _verticalSpeed) * Time.deltaTime, Space.World);
 
-        string animation = "";
-        if (_isGrounded)
+        if (_currentHorizontalSpeed > 0)
         {
-            if (_currentHorizontalSpeed != 0)
-            {
-                animation = AnimatorController.RUN;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else if (_currentHorizontalSpeed < 0)
+            transform.rotation = Quaternion.Euler(0, 180, 0);
 
-                int rotation = _currentHorizontalSpeed > 0 ? 0 : 180;
-                transform.rotation = Quaternion.Euler(0, rotation, 0);
-            }
-            else
-                animation = AnimatorController.IDLE;
-        }
-        else
+        if (isShooting)
+            return;
+        string animation = (_isGrounded, _currentHorizontalSpeed) switch
         {
-            //Jump animation
-        }
+            { _isGrounded: true, _currentHorizontalSpeed: var x} when x != 0 => AnimatorController.RUN,
+            (_, _) => AnimatorController.IDLE
+        };
         _animator.PlayAnimation(animation);
     }
     
@@ -65,17 +64,26 @@ public class CharacterController : MonoBehaviour
     {
         _currentHorizontalSpeed = Mathf.MoveTowards(_currentHorizontalSpeed, _desiredHorizontalSpeed, HorizontalAcceleration);
     }
+    #endregion
 
+    #region Input Events
     void OnJump()
     {
-        if (!_isGrounded)
+        if (!_isGrounded || isShooting)
             return;
 
         _verticalSpeed = JumpAcceleration;
     }
     void OnMove(InputValue value)
     {
+        if (isShooting)
+            return;
         _desiredHorizontalSpeed = Speed * value.Get<float>();
+    }
+
+    void OnShoot()
+    {
+        StartCoroutine(nameof(Shooting));
     }
     #endregion
 
@@ -114,6 +122,22 @@ public class CharacterController : MonoBehaviour
         {
             _verticalSpeed -= Time.deltaTime * GravityAcceleration;
         }
+    }
+
+    IEnumerator Shooting()
+    {
+        isShooting = true;
+
+        string animation = _currentHorizontalSpeed switch
+        {
+            0 => AnimatorController.SHOOT,
+            _ => AnimatorController.RUN_SHOOT
+        };
+
+        float animationTime = _animator.PlayAnimation(animation);
+        yield return new WaitForSeconds(animationTime);
+
+        isShooting = false;
     }
     #endregion
 }

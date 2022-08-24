@@ -24,9 +24,9 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Stop",
+                    "name": "Shoot",
                     "type": "Button",
-                    "id": "42f42261-63fe-4ff0-9013-db8a8cad4eed",
+                    "id": "5151654f-14c0-4952-b167-6af3fe6979e3",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -80,12 +80,12 @@
                 },
                 {
                     "name": "",
-                    "id": "baf41952-eea3-43ba-872d-ef193db5a701",
-                    "path": "",
+                    "id": "290ee2c3-1025-4755-966e-e41c3671524b",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Stop",
+                    "groups": "Keyboard and mouse",
+                    "action": "Shoot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
