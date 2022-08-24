@@ -2065,8 +2065,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df487c5c6bd61764bbca01095fbba86d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0.06
-  SecondsTillDestroying: 10
+  Speed: 0.2
+  SecondsTillDestroying: 5
 --- !u!212 &1778570385
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2520,22 +2520,6 @@ PrefabInstance:
       propertyPath: _bullet
       value: 
       objectReference: {fileID: 1778570383}
-    - target: {fileID: 7315862258108681498, guid: 24f9227829ace93449b31d8510064a66, type: 3}
-      propertyPath: m_Size.y
-      value: 0.04224375
-      objectReference: {fileID: 0}
-    - target: {fileID: 7315862258108681498, guid: 24f9227829ace93449b31d8510064a66, type: 3}
-      propertyPath: m_Offset.x
-      value: -0.099999994
-      objectReference: {fileID: 0}
-    - target: {fileID: 7315862258108681498, guid: 24f9227829ace93449b31d8510064a66, type: 3}
-      propertyPath: m_Offset.y
-      value: -0.39612186
-      objectReference: {fileID: 0}
-    - target: {fileID: 9069800142736846128, guid: 24f9227829ace93449b31d8510064a66, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.502
-      objectReference: {fileID: 0}
     - target: {fileID: 9069800143609303569, guid: 24f9227829ace93449b31d8510064a66, type: 3}
       propertyPath: m_Name
       value: Hero

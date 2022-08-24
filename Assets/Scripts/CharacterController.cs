@@ -18,14 +18,13 @@ public class CharacterController : MonoBehaviour
     #region Private Fields
     [SerializeField]
     private bool _isGrounded;
-    [SerializeField]
     private float _verticalSpeed;
-    [SerializeField]
     private float _desiredHorizontalSpeed;
-    [SerializeField]
     private float _currentHorizontalSpeed;
     [SerializeField]
-    private bool isShooting;
+    private bool _isShooting;
+    [SerializeField]
+    private bool _inputShootResult;
     [SerializeField]
     private GameObject _bullet;
     [SerializeField]
@@ -56,9 +55,8 @@ public class CharacterController : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 180, 0);
 
         //Animation Handling
-        if (isShooting)
+        if (_isShooting)
         {
-            StartCoroutine(nameof(Shooting));
             return;
         }
 
@@ -79,11 +77,12 @@ public class CharacterController : MonoBehaviour
     #region Input Events
     void OnJump()
     {
-        if (!_isGrounded || isShooting)
+        if (!_isGrounded)
             return;
 
         _verticalSpeed = JumpAcceleration;
     }
+
     void OnMove(InputValue value)
     {
         _desiredHorizontalSpeed = Speed * value.Get<float>();
@@ -91,7 +90,8 @@ public class CharacterController : MonoBehaviour
 
     void OnShoot(InputValue value)
     {
-        isShooting = value.isPressed;
+        _inputShootResult = value.isPressed;
+        StartCoroutine(nameof(Shooting));
     }
     #endregion
 
@@ -134,26 +134,32 @@ public class CharacterController : MonoBehaviour
 
     IEnumerator Shooting()
     {
-        string animation = _currentHorizontalSpeed switch
+        while (_inputShootResult)
         {
-            0 => AnimatorController.SHOOT,
-            _ => AnimatorController.RUN_SHOOT
-        };
+            _isShooting = true;
 
-        float animationTime = _animator.PlayAnimation(animation);
+            string animation = _currentHorizontalSpeed switch
+            {
+                0 => AnimatorController.SHOOT,
+                _ => AnimatorController.RUN_SHOOT
+            };
 
-        int frames = WaitFramesToShootBullet;
-        while (frames > 0)
-        {
-            frames--;
-            yield return new WaitForEndOfFrame();
+            float animationTime = _animator.PlayAnimation(animation);
+
+            int frames = WaitFramesToShootBullet;
+            while (frames > 0)
+            {
+                frames--;
+                yield return new WaitForEndOfFrame();
+            }
+
+            GameObject bullet = Instantiate(_bullet, _shootPoint.transform.position, transform.rotation);
+            bullet.GetComponent<FlyBullet>();
+            bullet.SetActive(true);
+
+            yield return new WaitForSeconds(animationTime);
+            _isShooting = false;
         }
-
-        GameObject bullet = Instantiate(_bullet, _shootPoint.transform.position, transform.rotation);
-        bullet.GetComponent<FlyBullet>();
-        bullet.SetActive(true);
-
-        yield return new WaitForSeconds(animationTime);
     }
     #endregion
 }
