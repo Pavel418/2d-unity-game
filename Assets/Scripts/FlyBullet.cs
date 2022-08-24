@@ -22,5 +22,6 @@ public class FlyBullet : MonoBehaviour
     IEnumerator WaitTillDestroy()
     {
         yield return new WaitForSeconds(SecondsTillDestroying);
+        Destroy(gameObject);
     }
 }
