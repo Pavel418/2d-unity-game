@@ -55,8 +55,13 @@ public class CharacterController : MonoBehaviour
         else if (_currentHorizontalSpeed < 0)
             transform.rotation = Quaternion.Euler(0, 180, 0);
 
+        //Animation Handling
         if (isShooting)
+        {
+            StartCoroutine(nameof(Shooting));
             return;
+        }
+
         string animation = (_isGrounded, _currentHorizontalSpeed) switch
         {
             { _isGrounded: true, _currentHorizontalSpeed: var x} when x != 0 => AnimatorController.RUN,
@@ -84,9 +89,9 @@ public class CharacterController : MonoBehaviour
         _desiredHorizontalSpeed = Speed * value.Get<float>();
     }
 
-    void OnShoot()
+    void OnShoot(InputValue value)
     {
-        StartCoroutine(nameof(Shooting));
+        isShooting = value.isPressed;
     }
     #endregion
 
@@ -129,8 +134,6 @@ public class CharacterController : MonoBehaviour
 
     IEnumerator Shooting()
     {
-        isShooting = true;
-
         string animation = _currentHorizontalSpeed switch
         {
             0 => AnimatorController.SHOOT,
@@ -151,8 +154,6 @@ public class CharacterController : MonoBehaviour
         bullet.SetActive(true);
 
         yield return new WaitForSeconds(animationTime);
-
-        isShooting = false;
     }
     #endregion
 }
