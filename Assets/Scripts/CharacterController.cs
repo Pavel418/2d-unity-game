@@ -76,8 +76,6 @@ public class CharacterController : MonoBehaviour
     }
     void OnMove(InputValue value)
     {
-        if (isShooting)
-            return;
         _desiredHorizontalSpeed = Speed * value.Get<float>();
     }
 
