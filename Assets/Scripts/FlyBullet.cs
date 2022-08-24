@@ -10,7 +10,7 @@ public class FlyBullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-            
+        StartCoroutine(nameof(WaitTillDestroy));
     }
 
     // Update is called once per frame
