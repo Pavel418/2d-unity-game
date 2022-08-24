@@ -10,6 +10,7 @@ public class CharacterController : MonoBehaviour
     public float JumpAcceleration;
     public float Speed;
     public float HorizontalAcceleration;
+    public int WaitFramesToShootBullet;
 
     public const string JumpAbleLayerName = "Solid Object";
     #endregion
@@ -25,6 +26,10 @@ public class CharacterController : MonoBehaviour
     private float _currentHorizontalSpeed;
     [SerializeField]
     private bool isShooting;
+    [SerializeField]
+    private GameObject _bullet;
+    [SerializeField]
+    private GameObject _shootPoint;
 
     private BoxCollider2D _footCollider;
     private AnimatorController _animator;
@@ -133,6 +138,18 @@ public class CharacterController : MonoBehaviour
         };
 
         float animationTime = _animator.PlayAnimation(animation);
+
+        int frames = WaitFramesToShootBullet;
+        while (frames > 0)
+        {
+            frames--;
+            yield return new WaitForEndOfFrame();
+        }
+
+        GameObject bullet = Instantiate(_bullet, _shootPoint.transform.position, transform.rotation);
+        bullet.GetComponent<FlyBullet>();
+        bullet.SetActive(true);
+
         yield return new WaitForSeconds(animationTime);
 
         isShooting = false;
