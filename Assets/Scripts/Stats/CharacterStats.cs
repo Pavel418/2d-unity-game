@@ -4,7 +4,8 @@ using UnityEngine;
 public class CharacterStats : MonoBehaviour, IDestructible
 {
     public Stat maxHealth;
-    public Stat CurrentHealth { get; private set; }
+
+    public Stat CurrentHealth;
 
     public Stat Damage;
     public Stat Armor;

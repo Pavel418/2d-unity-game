@@ -154,7 +154,7 @@ public class CharacterController : MonoBehaviour
             }
 
             GameObject bullet = Instantiate(_bullet, _shootPoint.transform.position, transform.rotation);
-            bullet.GetComponent<FlyBullet>();
+            bullet.GetComponent<FlyBullet>().Shooter = gameObject;
             bullet.SetActive(true);
 
             yield return new WaitForSeconds(animationTime);
