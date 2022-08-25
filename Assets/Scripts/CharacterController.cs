@@ -11,6 +11,7 @@ public class CharacterController : MonoBehaviour
     public float Speed;
     public float HorizontalAcceleration;
     public int WaitFramesToShootBullet;
+    public bool isFlipped;
 
     public const string JumpAbleLayerName = "Solid Object";
     #endregion
@@ -50,9 +51,14 @@ public class CharacterController : MonoBehaviour
         if (_currentHorizontalSpeed > 0)
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
+            isFlipped = false;
         }
         else if (_currentHorizontalSpeed < 0)
+        {
             transform.rotation = Quaternion.Euler(0, 180, 0);
+            isFlipped = true;
+        }
+            
 
         //Animation Handling
         if (_isShooting)
