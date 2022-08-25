@@ -27,12 +27,11 @@ public class CharacterController : MonoBehaviour
     [SerializeField]
     private bool _inputShootResult;
     [SerializeField]
-    private GameObject _bullet;
-    [SerializeField]
     private GameObject _shootPoint;
 
     private BoxCollider2D _footCollider;
     private AnimatorController _animator;
+    private CharacterStats _stats;
     #endregion
 
     #region Monobehaviour Events
@@ -40,6 +39,7 @@ public class CharacterController : MonoBehaviour
     {
         _footCollider = GetComponentInChildren<BoxCollider2D>();
         _animator = GetComponentInChildren<AnimatorController>();
+        _stats = GetComponentInChildren<CharacterStats>();
     }
     
     void Update()
@@ -63,6 +63,7 @@ public class CharacterController : MonoBehaviour
         string animation = (_isGrounded, _currentHorizontalSpeed) switch
         {
             { _isGrounded: true, _currentHorizontalSpeed: var x} when x != 0 => AnimatorController.RUN,
+            { _isGrounded: false, _currentHorizontalSpeed: _} => AnimatorController.JUMP,
             (_, _) => AnimatorController.IDLE
         };
         _animator.PlayAnimation(animation);
@@ -153,9 +154,7 @@ public class CharacterController : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
 
-            GameObject bullet = Instantiate(_bullet, _shootPoint.transform.position, transform.rotation);
-            bullet.GetComponent<FlyBullet>().Shooter = gameObject;
-            bullet.SetActive(true);
+            _stats.Weapon.ExecuteAttack(gameObject, _shootPoint.transform.position, transform.rotation);
 
             yield return new WaitForSeconds(animationTime);
             _isShooting = false;

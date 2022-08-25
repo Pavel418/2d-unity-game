@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 9069800142736846129}
   - component: {fileID: 8938448499107254767}
   - component: {fileID: 6179374949219145191}
-  m_Layer: 0
+  m_Layer: 1
   m_Name: spr
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -220,6 +220,7 @@ GameObject:
   - component: {fileID: 9069800143609303580}
   - component: {fileID: 8876109025370004717}
   - component: {fileID: 6551457816010643093}
+  - component: {fileID: 6934447758380523062}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Untagged
@@ -340,7 +341,31 @@ MonoBehaviour:
   HorizontalAcceleration: 0.5
   WaitFramesToShootBullet: 12
   _isGrounded: 0
+  _desiredHorizontalSpeed: 0
   _isShooting: 0
   _inputShootResult: 0
-  _bullet: {fileID: 0}
   _shootPoint: {fileID: 3623463470286607695}
+--- !u!114 &6934447758380523062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9069800143609303569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7be130012d72c4409420903db097383, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth:
+    BaseValue: 0
+  CurrentHealth:
+    BaseValue: 0
+  Damage:
+    BaseValue: 0
+  Armor:
+    BaseValue: 0
+  Weapon: {fileID: 11400000, guid: ec962f147f3ef1a43b7cd538a43a5395, type: 2}
+  attackCooldown: 0
+  isInvincible: 0
+  isDead: 0

@@ -10,6 +10,8 @@ public class CharacterStats : MonoBehaviour, IDestructible
     public Stat Damage;
     public Stat Armor;
 
+    public Weapon Weapon;
+
     [HideInInspector]
     public float attackCooldown;
 

@@ -9,6 +9,7 @@ public class AnimatorController : MonoBehaviour
     public static readonly string RUN = "Run";
     public static readonly string SHOOT = "Shoot";
     public static readonly string RUN_SHOOT = "RunNgun";
+    public static readonly string JUMP = "Jump";
 
     Animator _animator;
 

@@ -1,13 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlyBullet : MonoBehaviour
+public class Projectile : MonoBehaviour
 {
     public GameObject Shooter;
-    public Attack Attack = new() { Damage = 20};
-    public float Speed;
     public float SecondsTillDestroying = 10;
+
+    public event Action<GameObject, GameObject> ProjectileCollided;
+
+    [HideInInspector]
+    public float Speed;
 
     // Start is called before the first frame update
     void Start()
@@ -26,12 +30,7 @@ public class FlyBullet : MonoBehaviour
         if (collision.gameObject == Shooter)
             return;
 
-        var events = collision.gameObject.GetComponents<IAttackable>(); 
-        
-        foreach (var e in events)
-        {
-            e.OnAttack(gameObject, Attack);
-        }
+        ProjectileCollided?.Invoke(Shooter, collision.gameObject);
         Destroy(gameObject);
     }
 
