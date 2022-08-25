@@ -5,7 +5,8 @@ using UnityEngine;
 public abstract class CombatBase : MonoBehaviour
 {
     public Collider2D visionCollider;
-    public List<Collider2D> PatrolPoints = new();
+    public List<Transform> PatrolPoints = new();
+    public float reachDistance;
     public int Speed;
 
     [SerializeField]
@@ -72,7 +73,7 @@ public abstract class CombatBase : MonoBehaviour
     {
         var point = PatrolPoints[_currentPatrolPoint];
 
-        if (point.IsTouching(_characterCollider))
+        if (reachDistance > Vector2.Distance(transform.position, point.position))
         {
             _currentPatrolPoint++;
             if (_currentPatrolPoint >= PatrolPoints.Count)
