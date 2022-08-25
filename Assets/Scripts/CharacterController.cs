@@ -19,6 +19,7 @@ public class CharacterController : MonoBehaviour
     [SerializeField]
     private bool _isGrounded;
     private float _verticalSpeed;
+    [SerializeField]
     private float _desiredHorizontalSpeed;
     private float _currentHorizontalSpeed;
     [SerializeField]
@@ -40,7 +41,6 @@ public class CharacterController : MonoBehaviour
         _footCollider = GetComponentInChildren<BoxCollider2D>();
         _animator = GetComponentInChildren<AnimatorController>();
     }
-
     
     void Update()
     {
