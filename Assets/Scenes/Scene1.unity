@@ -7822,32 +7822,6 @@ MonoBehaviour:
   offsetY: 0
   spr: {fileID: 338217108}
   _obj: {fileID: 310354597}
---- !u!1 &542815250 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1095279943554310277, guid: 0cd73fc2c3d0ab64285e1e4823e7e842, type: 3}
-  m_PrefabInstance: {fileID: 797121582}
-  m_PrefabAsset: {fileID: 0}
---- !u!50 &542815256
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 542815250}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 1
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &687426088
 GameObject:
   m_ObjectHideFlags: 0
@@ -8237,7 +8211,7 @@ MonoBehaviour:
     m_Bits: 64
   triggerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 449
   oneWayPlatformMask:
     serializedVersion: 2
     m_Bits: 0
@@ -8286,14 +8260,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1838816076}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0
-  m_GravityScale: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -8379,7 +8353,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2368175706775388269, guid: 95f0a7225b1b3d14ea6e35ce493825b8, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2368175707277545012, guid: 95f0a7225b1b3d14ea6e35ce493825b8, type: 3}
       propertyPath: PatrolPoints.Array.data[0]
@@ -8399,7 +8373,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2368175707277545013, guid: 95f0a7225b1b3d14ea6e35ce493825b8, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2368175707277545015, guid: 95f0a7225b1b3d14ea6e35ce493825b8, type: 3}
       propertyPath: m_RootOrder
@@ -8542,7 +8516,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9069800143609303571, guid: 24f9227829ace93449b31d8510064a66, type: 3}
       propertyPath: m_BodyType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24f9227829ace93449b31d8510064a66, type: 3}
