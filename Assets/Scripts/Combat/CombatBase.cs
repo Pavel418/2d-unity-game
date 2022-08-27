@@ -1,3 +1,4 @@
+using Prime31;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,16 +6,12 @@ using UnityEngine;
 public abstract class CombatBase : MonoBehaviour
 {
     public Collider2D visionCollider;
-    public List<Transform> PatrolPoints = new();
-    public float reachDistance;
-    public int Speed;
 
     [SerializeField]
-    private int _currentPatrolPoint = 0;
-    [SerializeField]
-    private EnemyState _currentState;
-    private CharacterStats _stats;
-    private Collider2D _characterCollider;
+    protected EnemyState _currentState;
+    protected CharacterStats _stats;
+    protected Collider2D _characterCollider;
+    protected MovementController _movementController;
 
     // Start is called before the first frame update
     public virtual void Start()
@@ -22,26 +19,13 @@ public abstract class CombatBase : MonoBehaviour
         _stats = GetComponent<CharacterStats>();
         _currentState = EnemyState.Idle;
         _characterCollider = GetComponentInChildren<Collider2D>();
+        _movementController = GetComponentInChildren<MovementController>();
     }
 
     // Update is called once per frame
     public virtual void Update()
     {
-        switch (_currentState)
-        {
-            case EnemyState.Idle:
-                ChangeState(EnemyState.Patrolling);
-                break;
-            case EnemyState.Patrolling:
-                Patrol();
-                break;
-            case EnemyState.Chasing:
-                break;
-            case EnemyState.Attacking:
-                break;
-            default:
-                break;
-        }
+
     }
 
     public virtual void ChangeState(EnemyState newState)
@@ -67,26 +51,6 @@ public abstract class CombatBase : MonoBehaviour
             default:
                 break;
         }
-    }
-
-    protected virtual void Patrol()
-    {
-        var point = PatrolPoints[_currentPatrolPoint];
-
-        if (reachDistance > Vector2.Distance(transform.position, point.position))
-        {
-            _currentPatrolPoint++;
-            if (_currentPatrolPoint >= PatrolPoints.Count)
-                _currentPatrolPoint = 0;
-            return;
-        }
-
-        Move(point.transform);
-    }
-
-    protected virtual void Move(Transform point)
-    {
-        transform.position = Vector2.Lerp(transform.position, point.position, Speed * Time.deltaTime);
     }
 }
 

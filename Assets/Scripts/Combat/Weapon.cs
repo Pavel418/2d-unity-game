@@ -45,6 +45,7 @@ public class Weapon : ScriptableObject
         fire.Speed = ProjectileSpeed;
         fire.Shooter = attacker;
         fire.ProjectileCollided += OnProjectileCollided;
+        projectile.layer = ProjectileToFire.layer;
         projectile.SetActive(true);
     }
 
