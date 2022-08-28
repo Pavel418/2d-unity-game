@@ -74,7 +74,7 @@ public class MovementController : MonoBehaviour
 	/// defines how far in from the edges of the collider rays are cast from. If cast with a 0 extent it will often result in ray hits that are
 	/// not desired (for example a foot collider casting horizontally from directly on the surface can result in a hit)
 	/// </summary>
-	public float skinWidth
+	public float SkinWidth
 	{
 		get { return _skinWidth; }
 		set
@@ -142,7 +142,7 @@ public class MovementController : MonoBehaviour
 	public Rigidbody2D rigidBody2D;
 
 	[HideInInspector][NonSerialized]
-	public CharacterCollisionState2D collisionState = new CharacterCollisionState2D();
+	public CharacterCollisionState2D collisionState = new();
 	[HideInInspector][NonSerialized]
 	public Vector3 velocity;
 	public bool isGrounded { get { return collisionState.below; } }
@@ -190,7 +190,7 @@ public class MovementController : MonoBehaviour
 		rigidBody2D = GetComponent<Rigidbody2D>();
 
 		// here, we trigger our properties that have setters with bodies
-		skinWidth = _skinWidth;
+		SkinWidth = _skinWidth;
 
 		// we want to set our CC2D to ignore all collision layers except what is in our triggerMask
 		for( var i = 0; i < 32; i++ )
@@ -376,7 +376,7 @@ public class MovementController : MonoBehaviour
 					// this ensures that we stay flush to that slope
 					if ( !collisionState.wasGroundedLastFrame )
 					{
-						float flushDistance = Mathf.Sign( deltaMovement.x ) * ( _raycastHit.distance - skinWidth );
+						float flushDistance = Mathf.Sign( deltaMovement.x ) * ( _raycastHit.distance - SkinWidth );
 						transform.Translate( new Vector2( flushDistance, 0 ) );
 					}
 					break;
@@ -557,7 +557,7 @@ public class MovementController : MonoBehaviour
 				// going down we want to speed up in most cases so the slopeSpeedMultiplier curve should be > 1 for negative angles
 				var slopeModifier = slopeSpeedMultiplier.Evaluate( -angle );
 				// we add the extra downward movement here to ensure we "stick" to the surface below
-				deltaMovement.y += _raycastHit.point.y - slopeRay.y - skinWidth;
+				deltaMovement.y += _raycastHit.point.y - slopeRay.y - SkinWidth;
 				deltaMovement = new Vector3( 0, deltaMovement.y, 0 ) +
                                 ( Quaternion.AngleAxis( -angle, Vector3.forward ) * new Vector3( deltaMovement.x * slopeModifier, 0, 0 ) );
 				collisionState.movingDownSlope = true;

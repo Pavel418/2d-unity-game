@@ -28,11 +28,11 @@ public class CameraMove : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, temp, speed * Time.deltaTime);
 
 
-         if (_import.isFlipped == true && Input.GetKey(KeyCode.LeftShift))
+         if (_import.isFlipped && Input.GetKey(KeyCode.LeftShift))
         {
             offsetX = -10;
         }
-        else if (_import.isFlipped != true && Input.GetKey(KeyCode.LeftShift))
+        else if (!_import.isFlipped && Input.GetKey(KeyCode.LeftShift))
         {
             offsetX = 10;
         }
@@ -40,6 +40,5 @@ public class CameraMove : MonoBehaviour
         {
             offsetX = 0;
         }
-        
     }
 }
