@@ -156,7 +156,7 @@ MonoBehaviour:
   _currentState: 0
   Gravity: -25
   RunSpeed: 5
-  Acceleration: 20
+  Acceleration: 30
   groundDamping: 20
   inAirDamping: 5
   JumpStrength: 7

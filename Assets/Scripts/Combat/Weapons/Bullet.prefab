@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 1095279943554310298}
   - component: {fileID: 1095279943554310297}
   - component: {fileID: 1095279943554310302}
-  m_Layer: 0
+  - component: {fileID: 1267834281}
+  m_Layer: 6
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,8 +101,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Shooter: {fileID: 0}
-  Speed: 0.2
   SecondsTillDestroying: 5
+  Speed: 0.2
 --- !u!96 &1095279943554310297
 TrailRenderer:
   serializedVersion: 2
@@ -236,3 +237,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.03, y: 0.01}
   m_EdgeRadius: 0
+--- !u!50 &1267834281
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095279943554310277}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

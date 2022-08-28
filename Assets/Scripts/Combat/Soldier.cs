@@ -100,6 +100,7 @@ public class Soldier : CombatBase
 
     protected void Jump()
     {
-        _velocity.y = JumpStrength;
+        if (_movementController.isGrounded)
+            _velocity.y = JumpStrength;
     }
 }
